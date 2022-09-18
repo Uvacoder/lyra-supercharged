@@ -336,7 +336,7 @@ export default function Home() {
       </main>
 
       <footer className="fixed bottom-0 pt-10">
-        Powered by{" "}
+        Created by{" "}
         <a
           href="https://github.com/mateonunez"
           target="_blank"
@@ -344,7 +344,24 @@ export default function Home() {
           alt="Mateo Nunez on Github"
         >
           @mateonunez
+        </a>{" "}
+        using{" "}
+        <a href="https://nextjs.org" target="_blank" rel="noopener noreferrer">
+          Next.js
         </a>
+        ,{" "}
+        <a href="https://lyrajs.io" target="_blank" rel="noopener noreferrer">
+          Lyra
+        </a>
+        ,{" "}
+        <a
+          href="https://github.com/mateonunez/lyra-impact"
+          target="_blank"
+          rel="oopener noreferrer"
+        >
+          lyra-impact
+        </a>{" "}
+        and ❤️
       </footer>
     </div>
   );
