@@ -19,6 +19,7 @@ export default function Home() {
   const [documentsAreVisible, setDocumentsAreVisible] = useState(false);
   const [term, setTerm] = useState("");
   const [results, setResults] = useState(null);
+  const [query, setQuery] = useState(null);
 
   const handleSubmit = useCallback((fetcher, property, endpoint) => {
     if (!endpoint) throw new Error("Endpoint is required");
@@ -27,6 +28,7 @@ export default function Home() {
       fetch: {
         fetcher,
         property,
+        ...(fetcher === fetchers.graphql && { query }),
       },
     }).then((lyra) => {
       setLyra(lyra);
@@ -99,6 +101,39 @@ export default function Home() {
               </select>
             </div>
           </div>
+
+          {/* GraphQL query */}
+          {fetcher === "graphql" && (
+            <div className="p-3">
+              <label>GraphQL query</label>
+              <div className="relative">
+                <div className="icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"
+                    />
+                  </svg>
+                </div>
+
+                <textarea
+                  placeholder="GraphQL query"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  className="pl-10"
+                  rows="5"
+                />
+              </div>
+            </div>
+          )}
 
           {/* Property */}
           <div className="p-3">
