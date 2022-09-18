@@ -19,7 +19,7 @@ export default function Home() {
   const [documentsAreVisible, setDocumentsAreVisible] = useState(false);
   const [term, setTerm] = useState("");
   const [results, setResults] = useState(null);
-  const [query, setQuery] = useState(null);
+  const [query, setQuery] = useState("");
 
   const handleSubmit = useCallback((fetcher, property, endpoint) => {
     if (!endpoint) throw new Error("Endpoint is required");
@@ -35,6 +35,7 @@ export default function Home() {
       setSchema(lyra.schema);
       setDocs(lyra.docs);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -51,7 +52,7 @@ export default function Home() {
     <div className="container">
       <Head>
         <title>Lyra Impact supercharged 🌍☄️️</title>
-        <meta name="description" content="lyra-plugin supercharged" />
+        <meta name="description" content="lyra-impact supercharged" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -60,6 +61,7 @@ export default function Home() {
           Lyra Impact supercharged 🌍☄️️
         </h1>
 
+        {/* Form */}
         <form
           className="container pt-10"
           onSubmit={(e) => {
@@ -114,7 +116,7 @@ export default function Home() {
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    class="w-6 h-6"
+                    className="w-6 h-6"
                   >
                     <path
                       strokeLinecap="round"
@@ -207,6 +209,7 @@ export default function Home() {
           </div>
         </form>
 
+        {/* Schema */}
         {schema && (
           <div className="container py-3">
             <h3 className="text-bold">Lyra&apos;s schema created</h3>
@@ -232,6 +235,7 @@ export default function Home() {
           </div>
         )}
 
+        {/* Docs */}
         {Object.keys(docs).length > 0 && (
           <div className="container py-3">
             <h3 className="text-bold">
