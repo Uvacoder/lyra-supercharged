@@ -41,11 +41,9 @@ export default function Home() {
         term,
       });
 
-      console.log({ results });
-
       setResults(results);
     }
-  }, [term]);
+  }, [lyra, term]);
 
   return (
     <div className="container">
