@@ -3,7 +3,7 @@ import { impact } from "@mateonunez/lyra-impact";
 import Head from "next/head";
 import { useCallback, useEffect, useState } from "react";
 
-const fetchers = {
+export const fetchers = {
   rest: "rest",
   graphql: "graphql",
 };
