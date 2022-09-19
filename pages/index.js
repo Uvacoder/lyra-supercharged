@@ -57,7 +57,7 @@ export default function Home() {
       </Head>
 
       <main className="mt-10">
-        <h1 className="text-4xl font-bold text-center">
+        <h1 className="text-xl font-bold lg:text-4xl">
           Lyra Impact supercharged 🌍☄️️
         </h1>
 
@@ -164,7 +164,6 @@ export default function Home() {
                 placeholder="Property"
                 value={property}
                 onChange={(e) => setProperty(e.target.value)}
-                required
               />
             </div>
           </div>
