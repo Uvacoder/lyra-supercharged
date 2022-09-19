@@ -41,3 +41,15 @@ The payload accepted is the following parameters:
   "term": "pika"
 }
 ```
+
+**GraphQL example**
+
+```json
+{
+    "endpoint": "https://rickandmortyapi.com/graphql",
+    "fetcher": "graphql",
+    "property": "characters.results",
+    "query": "{characters { results { type status species name id gender } } }",
+    "term": "morty"
+}
+```
