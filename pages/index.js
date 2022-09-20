@@ -2,6 +2,7 @@ import { formatNanoseconds, search } from "@lyrasearch/lyra";
 import { impact } from "@mateonunez/lyra-impact";
 import Head from "next/head";
 import { useCallback, useEffect, useState } from "react";
+import { isValidUrl } from "../lib/utils";
 
 export const fetchers = {
   rest: "rest",
@@ -20,8 +21,10 @@ export default function Home() {
   const [term, setTerm] = useState("");
   const [results, setResults] = useState(null);
   const [query, setQuery] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = useCallback((fetcher, property, endpoint) => {
+    setError(null);
     if (!endpoint) throw new Error("Endpoint is required");
 
     impact(endpoint, {
@@ -30,13 +33,23 @@ export default function Home() {
         property,
         ...(fetcher === fetchers.graphql && { query }),
       },
-    }).then((lyra) => {
-      setLyra(lyra);
-      setSchema(lyra.schema);
-      setDocs(lyra.docs);
-    });
+    })
+      .then((lyra) => {
+        setLyra(lyra);
+        setSchema(lyra.schema);
+        setDocs(lyra.docs);
+      })
+      .catch((error) => {
+        // console.log({error})
+        setError(error);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    isValidUrl(endpoint) && handleSubmit(fetcher, property, endpoint);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [endpoint]);
 
   useEffect(() => {
     if (term) {
@@ -104,6 +117,38 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Endpoint */}
+          <div className="p-3">
+            <label>Endpoint</label>
+            <div className="relative">
+              <div className="icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                  />
+                </svg>
+              </div>
+
+              <input
+                className="pl-10"
+                type="text"
+                placeholder="Endpoint"
+                value={endpoint}
+                onChange={(e) => setEndpoint(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+
           {/* GraphQL query */}
           {fetcher === "graphql" && (
             <div className="p-3">
@@ -168,53 +213,23 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Endpoint */}
           <div className="p-3">
-            <label>Endpoint</label>
-            <div className="relative">
-              <div className="icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                  />
-                </svg>
-              </div>
-
-              <input
-                className="pl-10"
-                type="text"
-                placeholder="Endpoint"
-                value={endpoint}
-                onChange={(e) => setEndpoint(e.target.value)}
-                required
-              />
-
-              <button
-                type="submit"
-                className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              >
-                ☄️️
-              </button>
-            </div>
+            <button
+              type="submit"
+              className="text-white bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              ☄️️
+            </button>
           </div>
         </form>
 
         {/* Schema */}
         {schema && (
-          <div className="container py-3">
+          <div className="container p-3">
             <h3 className="text-bold">Lyra&apos;s schema created</h3>
 
             {/* Show the schema */}
-            <div className="flex py-3">
+            <div className="flex py-2">
               <button
                 className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={() => setSchemaIsVisible(!schemaIsVisible)}
@@ -236,14 +251,14 @@ export default function Home() {
 
         {/* Docs */}
         {Object.keys(docs).length > 0 && (
-          <div className="container py-3">
+          <div className="container p-3">
             <h3 className="text-bold">
               Lyra&apos;s docs inserted{" "}
               <span className="font-mono">({Object.keys(docs).length})</span>
             </h3>
 
             {/* Show the docs */}
-            <div className="flex py-3">
+            <div className="flex py-2">
               <button
                 className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={() => setDocumentsAreVisible(!documentsAreVisible)}
@@ -330,6 +345,21 @@ export default function Home() {
                   ))}
                 </div>
               ))}
+          </div>
+        )}
+
+        {/* Show errors */}
+        {error && (
+          <div className="container py-3">
+            <div className="flex flex-col">
+              <div
+                className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                role="alert"
+              >
+                <span className="font-medium">Error!</span>
+                <span className="block">{error.message}</span>
+              </div>
+            </div>
           </div>
         )}
       </main>
