@@ -42,7 +42,6 @@ export default function Home() {
       .catch((error) => {
         setError(error);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   };
 
   useEffect(() => {
