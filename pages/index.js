@@ -1,7 +1,7 @@
 import { formatNanoseconds, search } from "@lyrasearch/lyra";
 import { impact } from "@mateonunez/lyra-impact";
 import Head from "next/head";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { isValidUrl } from "../lib/utils";
 
 export const fetchers = {
@@ -23,7 +23,7 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const [error, setError] = useState(null);
 
-  const handleSubmit = useCallback((fetcher, property, endpoint) => {
+  const handleSubmit = (fetcher, property, endpoint) => {
     setError(null);
     if (!endpoint) throw new Error("Endpoint is required");
 
@@ -40,16 +40,21 @@ export default function Home() {
         setDocs(lyra.docs);
       })
       .catch((error) => {
-        // console.log({error})
         setError(error);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  };
 
   useEffect(() => {
-    isValidUrl(endpoint) && handleSubmit(fetcher, property, endpoint);
+    if (isValidUrl(endpoint)) {
+      if (fetcher === fetchers.graphql && !query) {
+        setError(new Error("Query is required"));
+      }
+
+      handleSubmit(fetcher, property, endpoint);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [endpoint]);
+  }, [endpoint, property, query]);
 
   useEffect(() => {
     if (term) {
