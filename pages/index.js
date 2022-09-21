@@ -1,7 +1,7 @@
 import { formatNanoseconds, search } from "@lyrasearch/lyra";
 import { impact } from "@mateonunez/lyra-impact";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import { isValidUrl } from "../lib/utils";
 
 export const fetchers = {
@@ -10,6 +10,8 @@ export const fetchers = {
 };
 
 export default function Home() {
+  const inputRef = createRef();
+
   const [fetcher, setFetcher] = useState(fetchers.rest);
   const [endpoint, setEndpoint] = useState("");
   const [property, setProperty] = useState("");
@@ -74,6 +76,11 @@ export default function Home() {
       setResults(results);
     }
   }, [lyra, term]);
+
+  useEffect(() => {
+    const { current } = inputRef;
+    if (current) current.focus();
+  }, [inputRef]);
 
   return (
     <div className="container">
@@ -328,6 +335,7 @@ export default function Home() {
                   </div>
 
                   <input
+                    ref={inputRef}
                     className="pl-10"
                     type="text"
                     placeholder="Search a term"
