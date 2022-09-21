@@ -8,6 +8,9 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f7fafc;
 }
 
 a {
@@ -26,7 +29,7 @@ label {
 input,
 textarea,
 select {
-  @apply block p-4 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 ;
+  @apply block p-4 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500; 
 }
 
 .icon {
@@ -34,6 +37,7 @@ select {
 }
 
 .container {
+  @apply lg:max-w-4xl;
   width: 80vw;
   margin: auto;
 }
