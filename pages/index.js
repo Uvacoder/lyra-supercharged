@@ -1,7 +1,7 @@
 import { formatNanoseconds, search } from "@lyrasearch/lyra";
 import { impact } from "@mateonunez/lyra-impact";
 import Head from "next/head";
-import { createRef, useEffect, useState } from "react";
+import { createRef, useEffect, useMemo, useState } from "react";
 import { isValidUrl } from "../lib/utils";
 
 export const fetchers = {
@@ -25,6 +25,8 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const isValidEndpoint = useMemo(() => isValidUrl(endpoint), [endpoint]);
 
   const handleSubmit = (fetcher, property, endpoint) => {
     setLoading(true);
@@ -53,13 +55,13 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (isValidUrl(endpoint)) {
+    if (isValidEndpoint) {
       if (fetcher === fetchers.graphql && !query) {
         setError(new Error("Query is required"));
       }
 
       handleSubmit(fetcher, property, endpoint);
-    } else if (endpoint && !isValidUrl(endpoint)) {
+    } else if (endpoint && !isValidEndpoint) {
       setError(new Error("Endpoint is not a valid URL"));
     } else {
       setError(null);
@@ -79,8 +81,8 @@ export default function Home() {
 
   useEffect(() => {
     const { current } = inputRef;
-    if (current) current.focus();
-  }, [inputRef]);
+    if (current && isValidEndpoint) current.focus();
+  }, [inputRef, isValidEndpoint]);
 
   return (
     <div className="container">
