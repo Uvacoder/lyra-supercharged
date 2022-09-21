@@ -22,9 +22,12 @@ export default function Home() {
   const [results, setResults] = useState(null);
   const [query, setQuery] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (fetcher, property, endpoint) => {
+    setLoading(true);
     setError(null);
+
     if (!endpoint) throw new Error("Endpoint is required");
 
     impact(endpoint, {
@@ -41,6 +44,9 @@ export default function Home() {
       })
       .catch((error) => {
         setError(error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -51,6 +57,10 @@ export default function Home() {
       }
 
       handleSubmit(fetcher, property, endpoint);
+    } else if (endpoint && !isValidUrl(endpoint)) {
+      setError(new Error("Endpoint is not a valid URL"));
+    } else {
+      setError(null);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [endpoint, property, query]);
@@ -209,144 +219,178 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Schema */}
-        {schema && (
-          <div className="container p-3">
-            <h3 className="text-bold">Lyra&apos;s schema created</h3>
-
-            {/* Show the schema */}
-            <div className="flex py-2">
-              <button
-                className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                onClick={() => setSchemaIsVisible(!schemaIsVisible)}
-              >
-                {schemaIsVisible ? "Hide" : "Show"} schema
-              </button>
-            </div>
-
-            {/* Schema created */}
-            {schemaIsVisible && (
-              <div className="flex flex-col">
-                <code>
-                  <pre>{JSON.stringify(schema, null, 2)}</pre>
-                </code>
-              </div>
-            )}
+        {/* Loading */}
+        {loading && (
+          // Loading spinner
+          <div className="flex justify-center mt-10">
+            <svg
+              className="w-10 h-10 text-gray-500 animate-spin"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v1a7 7 0 00-7 7h1z"
+              ></path>
+            </svg>
           </div>
         )}
 
-        {/* Docs */}
-        {Object.keys(docs).length > 0 && (
-          <div className="container p-3">
-            <h3 className="text-bold">
-              Lyra&apos;s docs inserted{" "}
-              <span className="font-mono">({Object.keys(docs).length})</span>
-            </h3>
+        {!loading && (
+          <>
+            {/* Schema */}
+            {schema && (
+              <div className="container p-3">
+                <h3 className="text-bold">Lyra&apos;s schema created</h3>
 
-            {/* Show the docs */}
-            <div className="flex py-2">
-              <button
-                className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                onClick={() => setDocumentsAreVisible(!documentsAreVisible)}
-              >
-                {documentsAreVisible ? "Hide" : "Show"} docs
-              </button>
-            </div>
+                {/* Show the schema */}
+                <div className="flex py-2">
+                  <button
+                    className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onClick={() => setSchemaIsVisible(!schemaIsVisible)}
+                  >
+                    {schemaIsVisible ? "Hide" : "Show"} schema
+                  </button>
+                </div>
 
-            {/* Docs created */}
-            {documentsAreVisible && (
-              <div className="flex flex-col">
-                <code>
-                  <pre>{JSON.stringify(docs, null, 2)}</pre>
-                </code>
+                {/* Schema created */}
+                {schemaIsVisible && (
+                  <div className="flex flex-col">
+                    <code>
+                      <pre>{JSON.stringify(schema, null, 2)}</pre>
+                    </code>
+                  </div>
+                )}
               </div>
             )}
-          </div>
-        )}
 
-        {/* Term */}
-        {schema && Object.keys(docs).length > 0 && (
-          <div className="p-3">
-            <label>Term</label>
-            <div className="relative">
-              <div className="icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+            {/* Docs */}
+            {Object.keys(docs).length > 0 && (
+              <div className="container p-3">
+                <h3 className="text-bold">
+                  Lyra&apos;s docs inserted{" "}
+                  <span className="font-mono">
+                    ({Object.keys(docs).length})
+                  </span>
+                </h3>
+
+                {/* Show the docs */}
+                <div className="flex py-2">
+                  <button
+                    className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onClick={() => setDocumentsAreVisible(!documentsAreVisible)}
+                  >
+                    {documentsAreVisible ? "Hide" : "Show"} docs
+                  </button>
+                </div>
+
+                {/* Docs created */}
+                {documentsAreVisible && (
+                  <div className="flex flex-col">
+                    <code>
+                      <pre>{JSON.stringify(docs, null, 2)}</pre>
+                    </code>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Term */}
+            {schema && Object.keys(docs).length > 0 && (
+              <div className="p-3">
+                <label>Term</label>
+                <div className="relative">
+                  <div className="icon">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                      />
+                    </svg>
+                  </div>
+
+                  <input
+                    className="pl-10"
+                    type="text"
+                    placeholder="Search a term"
+                    value={term}
+                    onChange={(e) => setTerm(e.target.value)}
+                    required
                   />
-                </svg>
+                </div>
               </div>
-
-              <input
-                className="pl-10"
-                type="text"
-                placeholder="Search a term"
-                value={term}
-                onChange={(e) => setTerm(e.target.value)}
-                required
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Results */}
-        {results && (
-          <div className="container py-3">
-            <p>
-              Elapsed time:{" "}
-              <span className="text-bold">
-                {formatNanoseconds(results.elapsed)}
-              </span>
-            </p>
-
-            <p>
-              Total count: <span className="text-bold">{results.count}</span>
-            </p>
+            )}
 
             {/* Results */}
-            {results?.hits?.length > 0 &&
-              results?.hits.map((hit) => (
-                <div
-                  className="flex flex-col p-3 my-5 overflow-hidden rounded shadow-lg full-width"
-                  key={hit.id}
-                >
-                  {Object.keys(hit).map((_key) => (
-                    <div className="flex flex-row items-center" key={_key}>
-                      <span className="font-bold">{_key}</span>
-                      <div className="pl-2">
-                        {typeof hit[_key] === "object"
-                          ? JSON.stringify(hit[_key], null, 2)
-                          : hit[_key]}
-                      </div>
+            {results && (
+              <div className="container py-3">
+                <p>
+                  Elapsed time:{" "}
+                  <span className="text-bold">
+                    {formatNanoseconds(results.elapsed)}
+                  </span>
+                </p>
+
+                <p>
+                  Total count:{" "}
+                  <span className="text-bold">{results.count}</span>
+                </p>
+
+                {/* Results */}
+                {results?.hits?.length > 0 &&
+                  results?.hits.map((hit) => (
+                    <div
+                      className="flex flex-col p-3 my-5 overflow-hidden rounded shadow-lg full-width"
+                      key={hit.id}
+                    >
+                      {Object.keys(hit).map((_key) => (
+                        <div className="flex flex-row items-center" key={_key}>
+                          <span className="font-bold">{_key}</span>
+                          <div className="pl-2">
+                            {typeof hit[_key] === "object"
+                              ? JSON.stringify(hit[_key], null, 2)
+                              : hit[_key]}
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   ))}
-                </div>
-              ))}
-          </div>
-        )}
-
-        {/* Show errors */}
-        {error && (
-          <div className="container py-3">
-            <div className="flex flex-col">
-              <div
-                className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
-                role="alert"
-              >
-                <span className="font-medium">Error!</span>
-                <span className="block">{error.message}</span>
               </div>
-            </div>
-          </div>
+            )}
+
+            {/* Show errors */}
+            {error && (
+              <div className="container p-3">
+                <div className="flex flex-col">
+                  <div
+                    className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                    role="alert"
+                  >
+                    <span className="font-medium">Error!</span>
+                    <span className="block">{error.message}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
         )}
       </main>
 
