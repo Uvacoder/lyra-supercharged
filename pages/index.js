@@ -79,10 +79,10 @@ export default function Home() {
     }
   }, [lyra, term]);
 
-  useEffect(() => {
-    const { current } = inputRef;
-    if (current && isValidEndpoint) current.focus();
-  }, [inputRef, isValidEndpoint]);
+  // useEffect(() => {
+  //   const { current } = inputRef;
+  //   if (current && isValidEndpoint) current.focus();
+  // }, [inputRef, isValidEndpoint]);
 
   return (
     <div className="container">
