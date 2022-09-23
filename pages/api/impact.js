@@ -65,6 +65,7 @@ export default async function handler(req, res) {
     fetch: {
       fetcher,
       property,
+      mode: "no-cors",
       ...(fetcher === fetchers.graphql && { query }),
     },
   });
