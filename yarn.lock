@@ -61,10 +61,10 @@
   resolved "https://registry.yarnpkg.com/@lyrasearch/lyra/-/lyra-0.2.4.tgz#982090699103e55c80d367dd3b5c64ae6c068237"
   integrity sha512-yTWq0wFv+DylA+2FNGnUck11u0BBvQI+TMv00OZ+Q3pldbZiy3Ps05rHvPgwbGQDtHGQ1nri8ZHz55enZ8vqNQ==
 
-"@mateonunez/lyra-impact@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@mateonunez/lyra-impact/-/lyra-impact-0.1.0.tgz#60dac2a81a72f6a01a9cc400df0c2588cd614264"
-  integrity sha512-5RrQNrr8eO995LrFJNYmaHdpSNB6+LRF0YajS0DbifLd0dcMLUs37ePD89+7+C0yDSNHu1b/E3ejQaaF/0quuw==
+"@mateonunez/lyra-impact@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@mateonunez/lyra-impact/-/lyra-impact-0.1.1.tgz#413c950adde1dc4f9ed3b0f6d2d4d0cb166d86db"
+  integrity sha512-JPGTWnq8kYx3AJK6En7ht433lDFdf0gmOFk3/fbuPHAz2a4fBMZRxiBmZboRX2QMXCqiyudG92nM1OpOKTUrEg==
   dependencies:
     "@lyrasearch/lyra" "^0.2.4"
 
