@@ -34,10 +34,13 @@ export default function Home() {
 
     if (!endpoint) throw new Error("Endpoint is required");
 
-    impact(endpoint, {
+    impact(`https://thingproxy.freeboard.io/fetch/${endpoint}`, {
       fetch: {
         fetcher,
         property,
+        headers: {
+          Origin: endpoint,
+        },
         ...(fetcher === fetchers.graphql && { query }),
       },
     })
@@ -48,6 +51,8 @@ export default function Home() {
       })
       .catch((error) => {
         setError(error);
+        setSchema(null);
+        setDocs({});
       })
       .finally(() => {
         setLoading(false);
