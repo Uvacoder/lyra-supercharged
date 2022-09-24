@@ -36,7 +36,6 @@ export default function Home() {
 
     impact(endpoint, {
       fetch: {
-        mode: "no-cors",
         fetcher,
         property,
         ...(fetcher === fetchers.graphql && { query }),
