@@ -1,4 +1,4 @@
-# Lyra Impact supercharged 🌍☄
+# Lyra supercharged 🌍☄
 
 [https://lyra-impact-supercharged.vercel.app](https://lyra-impact-supercharged.vercel.app)
 

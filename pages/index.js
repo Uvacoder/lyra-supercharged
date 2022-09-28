@@ -92,14 +92,14 @@ export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Lyra Impact supercharged 🌍☄️️</title>
+        <title>Lyra supercharged 🌍☄️️</title>
         <meta name="description" content="lyra-impact supercharged" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="min-h-screen mx-auto mt-10">
         <h1 className="text-xl font-bold lg:text-4xl">
-          Lyra Impact supercharged 🌍☄️️
+          Lyra supercharged 🌍☄️️
         </h1>
 
         {/* Fetcher */}
