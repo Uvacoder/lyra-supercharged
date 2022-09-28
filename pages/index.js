@@ -37,7 +37,7 @@ export default function Home() {
 
     if (!endpoint) throw new Error("Endpoint is required");
 
-    impact(`https://thingproxy.freeboard.io/fetch/${endpoint}`, {
+    impact(endpoint, {
       fetch: {
         fetcher,
         property,
