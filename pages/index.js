@@ -1,5 +1,6 @@
 import { formatNanoseconds, search } from "@lyrasearch/lyra";
 import { impact } from "@mateonunez/lyra-impact";
+import { match } from "@mateonunez/lyra-match";
 import Head from "next/head";
 import { createRef, useEffect, useMemo, useState } from "react";
 import { isValidUrl } from "../lib/utils";
@@ -22,9 +23,11 @@ export default function Home() {
   const [documentsAreVisible, setDocumentsAreVisible] = useState(false);
   const [term, setTerm] = useState("");
   const [results, setResults] = useState(null);
+  const [matches, setMatches] = useState([]);
   const [query, setQuery] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showMatches, setShowMatches] = useState(false);
 
   const isValidEndpoint = useMemo(() => isValidUrl(endpoint), [endpoint]);
 
@@ -59,6 +62,12 @@ export default function Home() {
       });
   };
 
+  const keyMatch = (key) => {
+    if (!key) return;
+
+    return matches && matches.find((match) => key !== "id" && match[key]);
+  };
+
   useEffect(() => {
     if (isValidEndpoint) {
       if (fetcher === fetchers.graphql && !query) {
@@ -76,18 +85,14 @@ export default function Home() {
 
   useEffect(() => {
     if (term) {
-      const results = search(lyra, {
-        term,
-      });
-
+      const props = { term };
+      const results = search(lyra, props);
+      const { hits } = results;
       setResults(results);
+
+      setMatches(match(hits, { term }));
     }
   }, [lyra, term]);
-
-  // useEffect(() => {
-  //   const { current } = inputRef;
-  //   if (current && isValidEndpoint) current.focus();
-  // }, [inputRef, isValidEndpoint]);
 
   return (
     <div className="container">
@@ -319,6 +324,21 @@ export default function Home() {
               </div>
             )}
 
+            {/* Hightlight matches  */}
+            {matches.length > 0 && (
+              <div class="p-3 ">
+                <div className="flex flex-row justify-start items-center">
+                  <h3 className="text-bold pr-3">Show matches</h3>
+                  <input
+                    type="checkbox"
+                    checked={showMatches}
+                    onChange={(e) => setShowMatches(e.target.checked)}
+                    className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2"
+                  />
+                </div>
+              </div>
+            )}
+
             {/* Term */}
             {schema && Object.keys(docs).length > 0 && (
               <div className="p-3">
@@ -363,12 +383,10 @@ export default function Home() {
                     {formatNanoseconds(results.elapsed)}
                   </span>
                 </p>
-
                 <p>
                   Total count:{" "}
                   <span className="text-bold">{results.count}</span>
                 </p>
-
                 {/* Results */}
                 {results?.hits?.length > 0 &&
                   results?.hits.map((hit) => (
@@ -378,7 +396,15 @@ export default function Home() {
                     >
                       {Object.keys(hit).map((_key) => (
                         <div className="flex flex-row items-center" key={_key}>
-                          <span className="font-bold">{_key}</span>
+                          <span
+                            className={
+                              showMatches && keyMatch(_key)
+                                ? "text-bold bg-yellow-200"
+                                : ""
+                            }
+                          >
+                            {_key}
+                          </span>
                           <div className="pl-2">
                             {typeof hit[_key] === "object"
                               ? JSON.stringify(hit[_key], null, 2)
