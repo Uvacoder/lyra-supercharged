@@ -61,19 +61,18 @@
   resolved "https://registry.yarnpkg.com/@lyrasearch/lyra/-/lyra-0.2.4.tgz#982090699103e55c80d367dd3b5c64ae6c068237"
   integrity sha512-yTWq0wFv+DylA+2FNGnUck11u0BBvQI+TMv00OZ+Q3pldbZiy3Ps05rHvPgwbGQDtHGQ1nri8ZHz55enZ8vqNQ==
 
-"@mateonunez/lyra-impact@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@mateonunez/lyra-impact/-/lyra-impact-0.2.2.tgz#c4f4706eef9252abc116215fa72aa6eebf506e4b"
-  integrity sha512-MWWnTMoOOR5Uq8lKQp+93BzMfxGlqBK6pnFflUF3DrHZswp6ow+bEXQvtcqUK/CVv9y0ZqJtk1UGIttt5Lc12g==
+"@mateonunez/lyra-impact@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@mateonunez/lyra-impact/-/lyra-impact-0.3.0.tgz#88c43b0f890570f7f8d025c17a2547e04dd655a8"
+  integrity sha512-L0mq5r/KIfcHuTGtuGIHLdddzNIxZcpy+TkzRdXlQlJWEfWN4P3QSiRv91NHajECK7SQy676wV8NziXuhnAe9w==
   dependencies:
     "@lyrasearch/lyra" "^0.2.4"
-    http-status "^1.5.3"
     undici "^5.10.0"
 
-"@mateonunez/lyra-match@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@mateonunez/lyra-match/-/lyra-match-0.0.2.tgz#94568fd0e7e06cc74d7f119ec6239728f4754dca"
-  integrity sha512-OhqJGX6YTGO3nLBeKWTteaPEUhNoCTNkvOeybD5OZBRTHtzucvfXOmBsIL01Smy+xIcLN2EeJ0ven7tR9Zrsjw==
+"@mateonunez/lyra-match@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@mateonunez/lyra-match/-/lyra-match-0.0.4.tgz#b4fcbf2f40c2eeebc87cee73dc29079f1c8478ff"
+  integrity sha512-w95eMRKr7YEfhm80tnwoar414nFakkT9IGBEJJCwutm3kMH67N40WK4YoCoJ/DN5SZX8y2yK6NTk/BvIgwM8ZA==
   dependencies:
     "@lyrasearch/lyra" "^0.2.4"
 
@@ -1066,11 +1065,6 @@ has@^1.0.3:
   integrity sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
   dependencies:
     function-bind "^1.1.1"
-
-http-status@^1.5.3:
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/http-status/-/http-status-1.5.3.tgz#9d1f6adcd1a609f535679f6e1b82811b96c3306e"
-  integrity sha512-jCClqdnnwigYslmtfb28vPplOgoiZ0siP2Z8C5Ua+3UKbx410v+c+jT+jh1bbI4TvcEySuX0vd/CfFZFbDkJeQ==
 
 ignore@^5.2.0:
   version "5.2.0"
