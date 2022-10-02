@@ -103,23 +103,14 @@ export default function Home() {
       </Head>
 
       <main className="min-h-screen mx-auto mt-10">
-        <h1 className="text-xl font-bold lg:text-4xl">
-          Lyra supercharged 🌍☄️️
-        </h1>
+        <h1 className="text-xl font-bold lg:text-4xl">Lyra supercharged 🌍☄️️</h1>
 
         {/* Fetcher */}
         <div className="p-3 mt-10">
           <label>Fetcher</label>
           <div className="relative">
             <div className="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -128,11 +119,7 @@ export default function Home() {
               </svg>
             </div>
 
-            <select
-              value={fetcher}
-              onChange={(e) => setFetcher(e.target.value)}
-              className="pl-10"
-            >
+            <select value={fetcher} onChange={(e) => setFetcher(e.target.value)} className="pl-10">
               {Object.entries(fetchers).map(([key, value]) => (
                 <option key={key} value={value}>
                   {key.toUpperCase()}
@@ -147,30 +134,12 @@ export default function Home() {
           <label>Endpoint</label>
           <div className="relative">
             <div className="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                />
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
               </svg>
             </div>
 
-            <input
-              className="pl-10"
-              type="text"
-              placeholder="Endpoint"
-              value={endpoint}
-              onChange={(e) => setEndpoint(e.target.value)}
-              required
-            />
+            <input className="pl-10" type="text" placeholder="Endpoint" value={endpoint} onChange={(e) => setEndpoint(e.target.value)} required />
           </div>
         </div>
 
@@ -180,29 +149,12 @@ export default function Home() {
             <label>GraphQL query</label>
             <div className="relative">
               <div className="icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
                 </svg>
               </div>
 
-              <textarea
-                placeholder="GraphQL query"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                className="pl-10"
-                rows="5"
-              />
+              <textarea placeholder="GraphQL query" value={query} onChange={(e) => setQuery(e.target.value)} className="pl-10" rows="5" />
             </div>
           </div>
         )}
@@ -212,14 +164,7 @@ export default function Home() {
           <label>Property</label>
           <div className="relative">
             <div className="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -228,13 +173,7 @@ export default function Home() {
               </svg>
             </div>
 
-            <input
-              className="pl-10"
-              type="text"
-              placeholder="Property"
-              value={property}
-              onChange={(e) => setProperty(e.target.value)}
-            />
+            <input className="pl-10" type="text" placeholder="Property" value={property} onChange={(e) => setProperty(e.target.value)} />
           </div>
         </div>
 
@@ -242,25 +181,9 @@ export default function Home() {
         {loading && (
           // Loading spinner
           <div className="flex justify-center mt-10">
-            <svg
-              className="w-10 h-10 text-gray-500 animate-spin"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-              ></circle>
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8v1a7 7 0 00-7 7h1z"
-              ></path>
+            <svg className="w-10 h-10 text-gray-500 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v1a7 7 0 00-7 7h1z"></path>
             </svg>
           </div>
         )}
@@ -297,10 +220,7 @@ export default function Home() {
             {Object.keys(docs).length > 0 && (
               <div className="container p-3">
                 <h3 className="text-bold">
-                  Lyra&apos;s docs inserted{" "}
-                  <span className="font-mono">
-                    ({Object.keys(docs).length})
-                  </span>
+                  Lyra&apos;s docs inserted <span className="font-mono">({Object.keys(docs).length})</span>
                 </h3>
 
                 {/* Show the docs */}
@@ -326,7 +246,7 @@ export default function Home() {
 
             {/* Hightlight matches  */}
             {matches.length > 0 && (
-              <div class="p-3 ">
+              <div className="p-3 ">
                 <div className="flex flex-row justify-start items-center">
                   <h3 className="text-bold pr-3">Show matches</h3>
                   <input
@@ -345,19 +265,8 @@ export default function Home() {
                 <label>Term</label>
                 <div className="relative">
                   <div className="icon">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                      />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
                   </div>
 
@@ -378,38 +287,19 @@ export default function Home() {
             {results && (
               <div className="container py-3">
                 <p>
-                  Elapsed time:{" "}
-                  <span className="text-bold">
-                    {formatNanoseconds(results.elapsed)}
-                  </span>
+                  Elapsed time: <span className="text-bold">{formatNanoseconds(results.elapsed)}</span>
                 </p>
                 <p>
-                  Total count:{" "}
-                  <span className="text-bold">{results.count}</span>
+                  Total count: <span className="text-bold">{results.count}</span>
                 </p>
                 {/* Results */}
                 {results?.hits?.length > 0 &&
                   results?.hits.map((hit) => (
-                    <div
-                      className="flex flex-col p-3 my-5 overflow-hidden rounded shadow-lg full-width"
-                      key={hit.id}
-                    >
+                    <div className="flex flex-col p-3 my-5 overflow-hidden rounded shadow-lg full-width" key={hit.id}>
                       {Object.keys(hit).map((_key) => (
                         <div className="flex flex-row items-center" key={_key}>
-                          <span
-                            className={
-                              showMatches && keyMatch(_key)
-                                ? "text-bold bg-yellow-200"
-                                : ""
-                            }
-                          >
-                            {_key}
-                          </span>
-                          <div className="pl-2">
-                            {typeof hit[_key] === "object"
-                              ? JSON.stringify(hit[_key], null, 2)
-                              : hit[_key]}
-                          </div>
+                          <span className={showMatches && keyMatch(_key) ? "text-bold bg-yellow-200" : ""}>{_key}</span>
+                          <div className="pl-2">{typeof hit[_key] === "object" ? JSON.stringify(hit[_key], null, 2) : hit[_key]}</div>
                         </div>
                       ))}
                     </div>
@@ -421,10 +311,7 @@ export default function Home() {
             {error && (
               <div className="container p-3">
                 <div className="flex flex-col">
-                  <div
-                    className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
-                    role="alert"
-                  >
+                  <div className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
                     <span className="font-medium">Error!</span>
                     <span className="block">{error.message}</span>
                   </div>
@@ -438,12 +325,7 @@ export default function Home() {
       {/* Footer  */}
       <footer className="bottom-0 py-5">
         Created by{" "}
-        <a
-          href="https://github.com/mateonunez"
-          target="_blank"
-          rel="noopener noreferrer"
-          alt="Mateo Nunez on Github"
-        >
+        <a href="https://github.com/mateonunez" target="_blank" rel="noopener noreferrer" alt="Mateo Nunez on Github">
           @mateonunez
         </a>{" "}
         using{" "}
@@ -455,11 +337,7 @@ export default function Home() {
           Lyra
         </a>
         ,{" "}
-        <a
-          href="https://github.com/mateonunez/lyra-impact"
-          target="_blank"
-          rel="oopener noreferrer"
-        >
+        <a href="https://github.com/mateonunez/lyra-impact" target="_blank" rel="oopener noreferrer">
           lyra-impact
         </a>{" "}
         and ❤️
