@@ -150,6 +150,21 @@ export default function Home() {
       </Head>
 
       <main className="min-h-screen mx-auto mt-10">
+        {/* Github */}
+        <div className="flex justify-end">
+          <a
+            href="https://github.com/mateonunez/lyra-supercharged"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://img.shields.io/github/stars/mateonunez/lyra-supercharged?style=social"
+              alt="Github Stars"
+            />
+          </a>
+        </div>
+
         <h1 className="text-xl font-bold md:text-4xl">Lyra Supercharged 💪</h1>
 
         {/* Fetcher */}
