@@ -98,15 +98,13 @@ export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Lyra supercharged 🌍☄️️</title>
+        <title>Lyra Supercharged 💪</title>
         <meta name="description" content="lyra-impact supercharged" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="min-h-screen mx-auto mt-10">
-        <h1 className="text-xl font-bold lg:text-4xl">
-          Lyra supercharged 🌍☄️️
-        </h1>
+        <h1 className="text-xl font-bold md:text-4xl">Lyra Supercharged 💪</h1>
 
         {/* Fetcher */}
         <div className="p-3 mt-10">
@@ -273,78 +271,88 @@ export default function Home() {
                 r="10"
                 stroke="currentColor"
                 strokeWidth="4"
-              ></circle>
+              />
               <path
                 className="opacity-75"
                 fill="currentColor"
                 d="M4 12a8 8 0 018-8v1a7 7 0 00-7 7h1z"
-              ></path>
+              />
             </svg>
           </div>
         )}
 
         {!loading && (
           <>
-            {/* Schema */}
-            {schema && (
-              <div className="container p-3">
-                <h3 className="text-bold">Lyra&apos;s schema created</h3>
+            <div className="flex justify-between">
+              {/* Schema */}
+              {schema && (
+                <div
+                  className="container w-full p-3 md:w-1/2"
+                  style={{ marginTop: 0 }}
+                >
+                  <h3 className="text-bold">Lyra&apos;s schema created</h3>
 
-                {/* Show the schema */}
-                <div className="flex py-2">
-                  <button
-                    className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    onClick={() => setSchemaIsVisible(!schemaIsVisible)}
-                  >
-                    {schemaIsVisible ? "Hide" : "Show"} schema
-                  </button>
-                </div>
-
-                {/* Schema created */}
-                {schemaIsVisible && (
-                  <div className="flex flex-col">
-                    <code>
-                      <pre>{JSON.stringify(schema, null, 2)}</pre>
-                    </code>
+                  {/* Show the schema */}
+                  <div className="flex py-2">
+                    <button
+                      className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      onClick={() => setSchemaIsVisible(!schemaIsVisible)}
+                    >
+                      {schemaIsVisible ? "Hide" : "Show"} schema
+                    </button>
                   </div>
-                )}
-              </div>
-            )}
 
-            {/* Docs */}
-            {Object.keys(docs).length > 0 && (
-              <div className="container p-3">
-                <h3 className="text-bold">
-                  Lyra&apos;s docs inserted{" "}
-                  <span className="font-mono">
-                    ({Object.keys(docs).length})
-                  </span>
-                </h3>
-
-                {/* Show the docs */}
-                <div className="flex py-2">
-                  <button
-                    className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    onClick={() => setDocumentsAreVisible(!documentsAreVisible)}
-                  >
-                    {documentsAreVisible ? "Hide" : "Show"} docs
-                  </button>
+                  {/* Schema created */}
+                  {schemaIsVisible && (
+                    <div className="flex flex-col">
+                      <code>
+                        <pre>{JSON.stringify(schema, null, 2)}</pre>
+                      </code>
+                    </div>
+                  )}
                 </div>
+              )}
 
-                {/* Docs created */}
-                {documentsAreVisible && (
-                  <div className="flex flex-col">
-                    <code>
-                      <pre>{JSON.stringify(docs, null, 2)}</pre>
-                    </code>
+              {/* Docs */}
+              {Object.keys(docs).length > 0 && (
+                <div
+                  className="container w-full p-3 md:w-1/2"
+                  style={{ marginTop: 0 }}
+                >
+                  <h3 className="text-bold">
+                    Lyra&apos;s docs inserted{" "}
+                    <span className="font-mono">
+                      ({Object.keys(docs).length})
+                    </span>
+                  </h3>
+
+                  {/* Show the docs */}
+                  <div className="flex py-2">
+                    <button
+                      className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      onClick={() =>
+                        setDocumentsAreVisible(!documentsAreVisible)
+                      }
+                    >
+                      {documentsAreVisible ? "Hide" : "Show"} docs
+                    </button>
                   </div>
-                )}
-              </div>
-            )}
+
+                  {/* Docs created */}
+                  {documentsAreVisible && (
+                    <div className="flex flex-col">
+                      <code>
+                        <pre>{JSON.stringify(docs, null, 2)}</pre>
+                      </code>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
 
             {/* Hightlight matches  */}
             {matches.length > 0 && (
-              <div className="p-3 ">
+              <div className="container w-full p-3 lg:w-1/2 ">
                 <div className="flex flex-row items-center justify-start">
                   <h3 className="pr-3 text-bold">Show matches</h3>
                   <input
@@ -479,6 +487,14 @@ export default function Home() {
           rel="oopener noreferrer"
         >
           lyra-impact
+        </a>
+        ,{" "}
+        <a
+          href="https://github.com/mateonunez/lyra-match"
+          target="_blank"
+          rel="oopener noreferrer"
+        >
+          lyra-match
         </a>{" "}
         and ❤️
       </footer>
