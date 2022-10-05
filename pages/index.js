@@ -549,6 +549,14 @@ export default function Home() {
           rel="oopener noreferrer"
         >
           lyra-match
+        </a>
+        ,{" "}
+        <a
+          href="https://github.com/LyraSearch/plugin-data-persistence"
+          target="_blank"
+          rel="oopener noreferrer"
+        >
+          data-persistence
         </a>{" "}
         and ❤️
       </footer>
