@@ -5,7 +5,6 @@ import { formatNanoseconds, search } from "@lyrasearch/lyra";
 import { fetchers } from "..";
 
 export default async function handler(req, res) {
-  console.log(req.method);
   if (req.method !== "POST") {
     res.setHeader("Allow", ["POST"]);
 

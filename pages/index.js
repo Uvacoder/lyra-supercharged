@@ -2,8 +2,13 @@ import { formatNanoseconds, search } from "@lyrasearch/lyra";
 import { impact } from "@mateonunez/lyra-impact";
 import { match } from "@mateonunez/lyra-match";
 import Head from "next/head";
-import { createRef, useEffect, useMemo, useState } from "react";
+import { createRef, useCallback, useEffect, useMemo, useState } from "react";
 import { isValidUrl } from "../lib/utils";
+import {
+  exportInstance,
+  persistToFile,
+} from "@lyrasearch/plugin-data-persistence";
+import Loading from "../components/ui/loading";
 
 export const fetchers = {
   rest: "rest",
@@ -13,22 +18,28 @@ export const fetchers = {
 export default function Home() {
   const inputRef = createRef();
 
-  const [fetcher, setFetcher] = useState(fetchers.rest);
-  const [endpoint, setEndpoint] = useState("");
-  const [property, setProperty] = useState("");
+  // Lyra
   const [lyra, setLyra] = useState(null);
   const [schema, setSchema] = useState(null);
   const [docs, setDocs] = useState({});
+  const [serializedData, setSerializedData] = useState(null);
+
+  // Settings and options
   const [schemaIsVisible, setSchemaIsVisible] = useState(false);
   const [documentsAreVisible, setDocumentsAreVisible] = useState(false);
-  const [term, setTerm] = useState("");
-  const [results, setResults] = useState(null);
-  const [matches, setMatches] = useState([]);
-  const [query, setQuery] = useState("");
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [showMatches, setShowMatches] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
+  const [fetcher, setFetcher] = useState(fetchers.rest);
+  const [endpoint, setEndpoint] = useState("");
+  const [property, setProperty] = useState("");
+  const [term, setTerm] = useState("");
+  const [query, setQuery] = useState("");
+
+  // Misc
+  const [loading, setLoading] = useState(false);
+  const [results, setResults] = useState(null);
+  const [matches, setMatches] = useState([]);
+  const [error, setError] = useState(null);
 
   const isValidEndpoint = useMemo(() => isValidUrl(endpoint), [endpoint]);
 
@@ -69,6 +80,35 @@ export default function Home() {
     return matches && matches.find((match) => key !== "id" && match[key]);
   };
 
+  const exportLyra = useCallback(() => {
+    const response = fetch("/api/export", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ serializedData }),
+    })
+      // .then((response) => response.json())
+      // .then(console.log);
+      .then((response) => response.blob())
+      .then((blob) => {
+        console.log(blob);
+        mockDownload(blob);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [serializedData]);
+
+  const mockDownload = useCallback((blob) => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.style.display = "none";
+    a.href = url;
+    a.download = "lyra.msp";
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }, []);
+
   useEffect(() => {
     if (isValidEndpoint) {
       if (fetcher === fetchers.graphql && !query) {
@@ -94,6 +134,12 @@ export default function Home() {
       setMatches(match(hits, { term }));
     }
   }, [lyra, term]);
+
+  useEffect(() => {
+    if (lyra) {
+      setSerializedData(exportInstance(lyra, "json"));
+    }
+  }, [lyra]);
 
   return (
     <div className="container">
@@ -255,31 +301,7 @@ export default function Home() {
         )}
 
         {/* Loading */}
-        {loading && (
-          // Loading spinner
-          <div className="flex justify-center mt-10">
-            <svg
-              className="w-10 h-10 text-gray-500 animate-spin"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-              />
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8v1a7 7 0 00-7 7h1z"
-              />
-            </svg>
-          </div>
-        )}
+        {loading && <Loading />}
 
         {!loading && (
           <>
@@ -440,6 +462,23 @@ export default function Home() {
                       ))}
                     </div>
                   ))}
+              </div>
+            )}
+
+            {/* Download Lyra database  */}
+            {serializedData && (
+              <div
+                className="container w-full p-3 m-0 md:w-1/2"
+                style={{ marginLeft: 0 }}
+              >
+                <button
+                  className="w-full px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700"
+                  onClick={() => {
+                    exportLyra();
+                  }}
+                >
+                  Export Lyra database
+                </button>
               </div>
             )}
 

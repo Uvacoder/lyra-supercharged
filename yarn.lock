@@ -61,6 +61,15 @@
   resolved "https://registry.yarnpkg.com/@lyrasearch/lyra/-/lyra-0.2.4.tgz#982090699103e55c80d367dd3b5c64ae6c068237"
   integrity sha512-yTWq0wFv+DylA+2FNGnUck11u0BBvQI+TMv00OZ+Q3pldbZiy3Ps05rHvPgwbGQDtHGQ1nri8ZHz55enZ8vqNQ==
 
+"@lyrasearch/plugin-data-persistence@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@lyrasearch/plugin-data-persistence/-/plugin-data-persistence-0.0.2.tgz#0bada343229eda8545c9c2b551517588097016fb"
+  integrity sha512-eFuElby81Ha9CQ4jVBA5UGbDZf/tlkLAxr2RsAl0i9Thu07MS1VAOHWlcd7wlExKpo04f1ZvmuXSC7Yb0wZ8cg==
+  dependencies:
+    "@msgpack/msgpack" "^2.7.2"
+    "@nearform/lyra" "^0.0.4"
+    dpack "^0.6.22"
+
 "@mateonunez/lyra-impact@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@mateonunez/lyra-impact/-/lyra-impact-0.3.0.tgz#88c43b0f890570f7f8d025c17a2547e04dd655a8"
@@ -75,6 +84,16 @@
   integrity sha512-w95eMRKr7YEfhm80tnwoar414nFakkT9IGBEJJCwutm3kMH67N40WK4YoCoJ/DN5SZX8y2yK6NTk/BvIgwM8ZA==
   dependencies:
     "@lyrasearch/lyra" "^0.2.4"
+
+"@msgpack/msgpack@^2.7.2":
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/@msgpack/msgpack/-/msgpack-2.8.0.tgz#4210deb771ee3912964f14a15ddfb5ff877e70b9"
+  integrity sha512-h9u4u/jiIRKbq25PM+zymTyW6bhTzELvOoUd+AvYriWOAKpLGnIamaET3pnHYoI5iYphAHBI4ayx0MehR+VVPQ==
+
+"@nearform/lyra@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@nearform/lyra/-/lyra-0.0.4.tgz#20734cbefc871ea5d218179efdf0dc1eb6d93282"
+  integrity sha512-X1Z553Ku+6nBkwW3zZ6aPAFLu6MmOkysUE7WpPAJYuEE5zgDLh2pGLy4NVPeTaIg3iBJvhLX4atz/lrJwEj4rQ==
 
 "@next/env@12.3.0":
   version "12.3.0"
@@ -575,6 +594,11 @@ doctrine@^3.0.0:
   integrity sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w==
   dependencies:
     esutils "^2.0.2"
+
+dpack@^0.6.22:
+  version "0.6.22"
+  resolved "https://registry.yarnpkg.com/dpack/-/dpack-0.6.22.tgz#e1c863e0145d6670d92380db1dfa93a4cf97d252"
+  integrity sha512-WGPNlW2OAE7Bj0eODMpAHUcEqxrlg01e9OFZDxQodminIgC194/cRHT7K04Z1j7AUEWTeeplYGrIv/xRdwU9Hg==
 
 electron-to-chromium@^1.4.251:
   version "1.4.254"

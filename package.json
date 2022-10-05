@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@lyrasearch/lyra": "^0.2.4",
+    "@lyrasearch/plugin-data-persistence": "^0.0.2",
     "@mateonunez/lyra-impact": "^0.3.0",
     "@mateonunez/lyra-match": "^0.0.4",
     "next": "12.3.0",
