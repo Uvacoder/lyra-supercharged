@@ -9,6 +9,7 @@ import {
   persistToFile,
 } from "@lyrasearch/plugin-data-persistence";
 import Loading from "../components/ui/loading";
+import Image from "next/image";
 
 export const fetchers = {
   rest: "rest",
@@ -81,20 +82,15 @@ export default function Home() {
   };
 
   const exportLyra = useCallback(() => {
-    const response = fetch("/api/export", {
+    fetch("/api/export", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ serializedData }),
     })
-      // .then((response) => response.json())
-      // .then(console.log);
       .then((response) => response.blob())
-      .then((blob) => {
-        console.log(blob);
-        mockDownload(blob);
-      });
+      .then(mockDownload);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [serializedData]);
 
@@ -157,9 +153,11 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="https://img.shields.io/github/stars/mateonunez/lyra-supercharged?style=social"
+              width="72"
+              height="20"
+              layout="fixed"
               alt="Github Stars"
             />
           </a>
