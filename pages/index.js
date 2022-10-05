@@ -4,12 +4,8 @@ import { match } from "@mateonunez/lyra-match";
 import Head from "next/head";
 import { createRef, useCallback, useEffect, useMemo, useState } from "react";
 import { isValidUrl } from "../lib/utils";
-import {
-  exportInstance,
-  persistToFile,
-} from "@lyrasearch/plugin-data-persistence";
+import { exportInstance } from "@lyrasearch/plugin-data-persistence";
 import Loading from "../components/ui/loading";
-import Image from "next/image";
 
 export const fetchers = {
   rest: "rest",
@@ -153,11 +149,11 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src="https://img.shields.io/github/stars/mateonunez/lyra-supercharged?style=social"
               width="72"
               height="20"
-              layout="fixed"
               alt="Github Stars"
             />
           </a>
