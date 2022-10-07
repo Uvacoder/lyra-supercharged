@@ -1,0 +1,36 @@
+{
+  "theme_color": "#100",
+  "background_color": "#900",
+  "display": "standalone",
+  "scope": ".",
+  "start_url": "/",
+  "name": "Lyra supercharged",
+  "short_name": "Lyra supercharged",
+  "description": "This is a demostration of Lyra's superpowers. The web application implement a lot of Lyra plugins and features that you can use in your own projects.",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
