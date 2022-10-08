@@ -10,7 +10,19 @@ export default function Homepage() {
   const [lyra, setLyra] = useState(null);
 
   const endpointCallback = useCallback((endpoint, config) => {
-    impact(endpoint, config).then((lyra) => setLyra(lyra));
+    impact("/api/forward", {
+      fetch: {
+        method: "POST",
+        property: "profile.repositories",
+        body: JSON.stringify({
+          endpoint,
+        }),
+      },
+    })
+      .then((lyra) => {
+        console.log(lyra);
+      })
+      .catch((error) => console.error(error));
   }, []);
 
   return (
