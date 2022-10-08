@@ -1,7 +1,8 @@
 import Image from "next/image";
 import styles from "./container-image.module.css";
+import cn from "classnames";
 
-export default function ContainerImage({ src, alt = "", title = "", quality = 60, layout = "fill", children }) {
+export default function ContainerImage({ src, alt = "", title = "", quality = 60, layout = "fill", classNameContent, children }) {
   return (
     <div className={styles.root}>
       <div className={styles.imageContainer}>
@@ -10,7 +11,7 @@ export default function ContainerImage({ src, alt = "", title = "", quality = 60
 
         <div className={styles.imageOverlay} />
 
-        <div className={styles.content}>{children}</div>
+        <div className={cn(styles.content, classNameContent)}>{children}</div>
       </div>
     </div>
   );
