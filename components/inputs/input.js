@@ -7,7 +7,8 @@ const Input = ({ label, autofocus, IconLeft, IconRight, ...props }, ref) => {
     if (autofocus) {
       ref.current.focus();
     }
-  }, [autofocus, ref]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autofocus]);
 
   return (
     <>

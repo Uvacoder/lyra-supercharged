@@ -5,7 +5,7 @@ import Input from "./input";
 
 export default function EndpointInput({ callback }) {
   const inputRef = useRef(null);
-  const [endpoint, setEndpoint] = useState("");
+  const [endpoint, setEndpoint] = useState("https://raw.githubusercontent.com/LyraSearch/lyra/main/examples/with-vue/public/pokedex.json");
   const [isFocus, setIsFocus] = useState(false);
 
   const isValidEndpoint = useMemo(() => isValidUrl(endpoint), [endpoint]);

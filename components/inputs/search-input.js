@@ -2,7 +2,7 @@ import { useRef, useState, useMemo, useEffect } from "react";
 import { CrossIcon, MagnifyingGlassIcon } from "../icons";
 import Input from "./input";
 
-export default function SearchInput({ autofocus = false, callback }) {
+export default function SearchInput({ autofocus = false, callback, actionCallback }) {
   const inputRef = useRef(null);
   const [term, setTerm] = useState("");
   const [isFocus, setIsFocus] = useState(false);
@@ -28,7 +28,14 @@ export default function SearchInput({ autofocus = false, callback }) {
         IconLeft={() => <MagnifyingGlassIcon className="w-6 h-6 text-black" />}
         IconRight={() =>
           term.length > 0 && (
-            <button onMouseDown={() => setTerm("")} title="Reset">
+            <button
+              onMouseDown={() => {
+                if (actionCallback) actionCallback();
+
+                setTerm("");
+              }}
+              title="Reset"
+            >
               <CrossIcon className="w-6 h-6 text-black" />
             </button>
           )
