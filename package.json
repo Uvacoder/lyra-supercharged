@@ -1,12 +1,26 @@
 {
   "name": "lyra-supercharged",
   "version": "0.1.0",
+  "author": {
+    "email": "mateonunez95@gmail.com",
+    "name": "Mateo Nunez",
+    "url": "https://github.com/mateonunez"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
+  "keywords": [
+    "lyra",
+    "lyra-impact",
+    "full-text search",
+    "supercharged",
+    "database",
+    "lyra-match",
+    "lyra-data-persistence "
+  ],
   "dependencies": {
     "@lyrasearch/lyra": "^0.2.5",
     "@lyrasearch/plugin-data-persistence": "^0.0.2",
@@ -18,8 +32,11 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.11",
+    "classnames": "^2.3.2",
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1",
+    "next-seo": "^5.5.0",
+    "nprogress": "^0.2.0",
     "postcss": "^8.4.16",
     "tailwindcss": "^3.1.8"
   },

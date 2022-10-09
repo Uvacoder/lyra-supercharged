@@ -1,0 +1,47 @@
+{
+  "title": "Lyra supercharged - Yes, Lyra has superpowers",
+  "titleTemplate": "%s - Lyra supercharged",
+  "description": "This is a demostration of Lyra's superpowers. The web application implement a lot of Lyra plugins and features that you can use in your own projects.",
+  "openGraph": {
+    "title": "Lyra supercharged",
+    "description": "This is a demostration of Lyra's superpowers. The web application implement a lot of Lyra plugins and features that you can use in your own projects.",
+    "type": "website",
+    "locale": "it_IT",
+    "url": "https://lyra-supercharged.vercel.app",
+    "site_name": "Lyra supercharged",
+    "images": [
+      {
+        "url": "https://lyra-supercharged.vercel.app/card.png",
+        "width": 512,
+        "height": 512,
+        "alt": "Lyra supercharged"
+      }
+    ]
+  },
+  "twitter": {
+    "handle": "@mateonunez95",
+    "site": "https://twitter.com/mateonunez95",
+    "cardType": "summary_large_image"
+  },
+  "additionalLinkTags": [
+    {
+      "rel": "icon",
+      "href": "/favicon.ico",
+      "type": "image/x-icon"
+    },
+    {
+      "rel": "icon",
+      "href": "/favicon-16x16.png",
+      "type": "image/png"
+    },
+    {
+      "rel": "apple-touch-icon",
+      "href": "/apple-touch-icon.png",
+      "sizes": "76x76"
+    },
+    {
+      "rel": "manifest",
+      "href": "/site.webmanifest"
+    }
+  ]
+}
