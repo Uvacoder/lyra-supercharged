@@ -1,11 +1,11 @@
+import { useCallback, useState } from "react";
 import { search } from "@lyrasearch/lyra";
 import { impact } from "@mateonunez/lyra-impact";
-import { useCallback, useState } from "react";
-import ContainerImage from "../components/containers/container-image";
-import { EndpointInput, SearchInput } from "../components/inputs/";
-import config from "../lib/config/config.json";
-import cn from "classnames";
 import { match } from "@mateonunez/lyra-match";
+import config from "../lib/config/config.json";
+import ContainerImage from "../components/containers/container-image";
+import Loading from "../components/loading";
+import { EndpointInput, SearchInput } from "../components/inputs/";
 import { ResultsTable } from "../components/tables";
 
 export default function Homepage() {
@@ -66,11 +66,7 @@ export default function Homepage() {
         )}
 
         {/* Enpoint input */}
-        {!lyra && (
-          <div className="w-full px-10 md:m-auto md:w-2/3">
-            <EndpointInput callback={endpointCallback} />
-          </div>
-        )}
+        {!lyra && <div className="w-full px-10 md:m-auto md:w-2/3">{fetchingEndpoint ? <Loading /> : <EndpointInput callback={endpointCallback} />}</div>}
 
         {/* Results */}
         <div className="w-full px-10 my-auto md:m-auto">
