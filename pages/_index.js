@@ -5,7 +5,7 @@ import Head from "next/head";
 import { createRef, useCallback, useEffect, useMemo, useState } from "react";
 import { isValidUrl } from "../lib/utils";
 import { exportInstance } from "@lyrasearch/plugin-data-persistence";
-import Loading from "../components/ui/loading";
+import Loading from "../components/loading";
 
 export const fetchers = {
   rest: "rest",
