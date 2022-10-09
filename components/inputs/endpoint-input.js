@@ -7,14 +7,21 @@ export default function EndpointInput({ callback }) {
   const inputRef = useRef(null);
   const [endpoint, setEndpoint] = useState("");
   const [isFocus, setIsFocus] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
 
   const isValidEndpoint = useMemo(() => isValidUrl(endpoint), [endpoint]);
 
   useEffect(() => {
-    if (isValidEndpoint) {
-      callback(endpoint);
+    const timeout = setTimeout(() => {
+      if (isValidEndpoint && !isTyping) {
+        callback(endpoint);
+      }
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeout);
     }
-  }, [callback, endpoint, isValidEndpoint]);
+  }, [callback, endpoint, isTyping, isValidEndpoint]);
 
   return (
     <>
@@ -26,6 +33,8 @@ export default function EndpointInput({ callback }) {
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         IconLeft={() => <MagnifyingGlassIcon className="w-6 h-6 text-black" />}
+        onKeyPress={() => setIsTyping(true)}
+        onKeyUp={() => setIsTyping(false)}
         IconRight={() =>
           endpoint.length > 0 && (
             <button onMouseDown={() => setEndpoint("")} title="Reset">
