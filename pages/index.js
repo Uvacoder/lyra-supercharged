@@ -46,9 +46,14 @@ export default function Homepage() {
     [lyra]
   );
 
+  const onClearTerm = useCallback(() => {
+    setResults([]);
+    setMatches([]);
+  }, []);
+
   return (
     <>
-      <div className="relative z-50 flex flex-col justify-between h-full">
+      <div className="relative z-50 flex flex-col h-full">
         {/* Title */}
         <div className="mx-auto mt-5 text-center">
           <h1 className="title">{config.appName}</h1>
@@ -61,7 +66,7 @@ export default function Homepage() {
         {/* Search input */}
         {lyra && (
           <div className="w-full p-10 mx-auto mt-0 md:w-2/3">
-            <SearchInput autofocus callback={searchCallback} />
+            <SearchInput autofocus callback={searchCallback} actionCallback={onClearTerm} />
           </div>
         )}
 
@@ -69,8 +74,8 @@ export default function Homepage() {
         {!lyra && <div className="w-full px-10 md:m-auto md:w-2/3">{fetchingEndpoint ? <Loading /> : <EndpointInput callback={endpointCallback} />}</div>}
 
         {/* Results */}
-        <div className="w-full px-10 my-auto md:m-auto">
-          <ResultsTable results={results} matches={matches} />
+        <div className="w-full px-10 my-10 md:mx-auto">
+          {results.hits?.length > 0 && <ResultsTable results={results} matches={matches} />}
           {/* {results && results.hits && results.hits.length > 0 &&  />} */}
         </div>
       </div>
