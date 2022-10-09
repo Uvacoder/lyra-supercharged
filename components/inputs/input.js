@@ -1,9 +1,14 @@
-import { forwardRef } from "react";
+import { forwardRef, useEffect } from "react";
 import styles from "./input.module.css";
 import cn from "classnames";
 // Icon is passed capitalized because it's a component
-const Input = ({ label, IconLeft, IconRight, ...props }, ref) => {
-  
+const Input = ({ label, autofocus, IconLeft, IconRight, ...props }, ref) => {
+  useEffect(() => {
+    if (autofocus) {
+      ref.current.focus();
+    }
+  }, [autofocus, ref]);
+
   return (
     <>
       <div className={styles.root}>

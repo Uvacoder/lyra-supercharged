@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { isValidUrl } from "../../../lib/utils";
-import { CrossIcon, MagnifyingGlassIcon } from "../../icons";
+import { isValidUrl } from "../../lib/utils";
+import { CrossIcon, MagnifyingGlassIcon } from "../icons";
 import Input from "./input";
 
 export default function EndpointInput({ callback }) {
@@ -14,15 +14,14 @@ export default function EndpointInput({ callback }) {
     if (isValidEndpoint) {
       callback(endpoint);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isValidEndpoint]);
+  }, [callback, endpoint, isValidEndpoint]);
 
   return (
     <>
       <Input
         ref={inputRef}
         value={endpoint}
-        placeholder="Insert a endpoint..."
+        placeholder="What is the destination?"
         onChange={({ target: { value } }) => setEndpoint(value)}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}

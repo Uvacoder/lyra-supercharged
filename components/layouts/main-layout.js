@@ -34,7 +34,7 @@ export default function MainLayout({ children }) {
       {loading && <div className="loading-overlay" />}
 
       {/* Main  */}
-      <main>{children}</main>
+      <main className="h-screen">{children}</main>
     </>
   );
 }
