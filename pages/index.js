@@ -71,7 +71,7 @@ export default function Homepage() {
         )}
 
         {/* Enpoint input */}
-        {!lyra && <div className="w-full px-10 md:m-auto md:w-2/3">{fetchingEndpoint ? <Loading /> : <EndpointInput callback={endpointCallback} />}</div>}
+        {!lyra && <div className="w-full px-10 m-auto md:w-2/3">{fetchingEndpoint ? <Loading /> : <EndpointInput callback={endpointCallback} />}</div>}
 
         {/* Results */}
         <div className="w-full px-10 my-10 md:mx-auto">
