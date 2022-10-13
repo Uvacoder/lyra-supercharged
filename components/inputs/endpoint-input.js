@@ -14,13 +14,13 @@ export default function EndpointInput({ callback }) {
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (isValidEndpoint && !isTyping) {
-        callback(endpoint);
+        if(callback) callback.call(this, endpoint);
       }
     }, 1000);
 
     return () => {
       clearTimeout(timeout);
-    }
+    };
   }, [callback, endpoint, isTyping, isValidEndpoint]);
 
   return (

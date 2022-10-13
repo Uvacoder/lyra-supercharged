@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { search } from "@lyrasearch/lyra";
 import { impact } from "@mateonunez/lyra-impact";
 import { match } from "@mateonunez/lyra-match";
@@ -13,6 +13,7 @@ export default function Homepage() {
   const [lyra, setLyra] = useState(null);
   const [results, setResults] = useState([]);
   const [matches, setMatches] = useState([]);
+  const [properties, setProperties] = useState([]);
 
   const endpointCallback = useCallback((endpoint, config) => {
     setFetchingEndpoint(true);
@@ -25,7 +26,10 @@ export default function Homepage() {
         }),
       },
     })
-      .then((lyra) => setLyra(lyra))
+      .then((lyra) => {
+        setLyra(lyra);
+        setProperties(Object.keys(lyra.schema));
+      })
       .catch((error) => {
         // handle error here, should I provide `property` input?
         console.error(error);
@@ -66,7 +70,7 @@ export default function Homepage() {
         {/* Search input */}
         {lyra && (
           <div className="w-full p-10 mx-auto mt-0 md:w-2/3">
-            <SearchInput autofocus callback={searchCallback} actionCallback={onClearTerm} />
+            <SearchInput autofocus properties={properties} callback={searchCallback} actionCallback={onClearTerm} />
           </div>
         )}
 
