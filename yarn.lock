@@ -61,6 +61,11 @@
   resolved "https://registry.yarnpkg.com/@lyrasearch/lyra/-/lyra-0.2.5.tgz#215ffdb44665292ed513aa23a921ff27cd5f3777"
   integrity sha512-Nsx3+4XNxRjbbq2cFgXjogr098RX0b4gd9beixr9u5gMpYGpz7jufKLDeXq6QFGrQXIsFc1VdIfJe5MHgpfFtA==
 
+"@lyrasearch/lyra@^0.2.6":
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/@lyrasearch/lyra/-/lyra-0.2.6.tgz#3bb6b3ac4f6125b441f9d6227fce4b5efd708dd8"
+  integrity sha512-sgqyT2vib0J1CeuqgsLU2wOdhAoVaDUu+5HmRUsLPeVMdFnOLzyf9i4iVlYktPu8XLjqHY/WRP8RBDYF2ILP4A==
+
 "@lyrasearch/plugin-data-persistence@^0.0.2":
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/@lyrasearch/plugin-data-persistence/-/plugin-data-persistence-0.0.2.tgz#0bada343229eda8545c9c2b551517588097016fb"
@@ -70,12 +75,12 @@
     "@nearform/lyra" "^0.0.4"
     dpack "^0.6.22"
 
-"@mateonunez/lyra-impact@^0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@mateonunez/lyra-impact/-/lyra-impact-0.3.1.tgz#34fd9e90aa61843eda2eae7584e2590b21d4db20"
-  integrity sha512-GZYU/gLB3LrXb27/V5YaNjemoR5psgp/WU6EYoFxzjHMSfaYBuSD5NtEf82Z0aIYsoW4a9MFB5WHHPZylk3GGA==
+"@mateonunez/lyra-impact@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@mateonunez/lyra-impact/-/lyra-impact-0.3.3.tgz#214bfc953e9e780742f0372ef9ad488ea8e27a3e"
+  integrity sha512-Dt4UL4k1td7OvTlryjjta1u1IJfHeca3p9gbNR/1ZI6W1PE7w/zMkBCC0ZUzWxnBnwuFrJYt6FuTEh7Dwy6h4Q==
   dependencies:
-    "@lyrasearch/lyra" "^0.2.5"
+    "@lyrasearch/lyra" "^0.2.6"
     undici "^5.10.0"
 
 "@mateonunez/lyra-match@^0.0.5":
