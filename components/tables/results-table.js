@@ -55,7 +55,18 @@ export default function ResultsTable({ results, matches, ...props }) {
                     (header, index) =>
                       header !== "id" && (
                         <td className="px-6 py-4" key={`body-column-${index}`}>
-                          {hit[header]}
+                          {typeof hit[header] === "object" ? (
+                            <>
+                              {Object.keys(hit[header]).map((key, index) => (
+                                <div key={`body-column-${index}`}>
+                                  <span className="font-bold">{titleCase(key)}:</span>{" "}
+                                  {typeof hit[header][key] === "object" ? JSON.stringify(hit[header][key]) : hit[header][key]}
+                                </div>
+                              ))}
+                            </>
+                          ) : (
+                            hit[header]
+                          )}
                         </td>
                       )
                   )}
